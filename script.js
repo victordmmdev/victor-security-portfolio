@@ -2,16 +2,22 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+const revealElements = document.querySelectorAll('.reveal');
 
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+if ('IntersectionObserver' in window && !reducedMotion) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -24px' });
+
+  revealElements.forEach((element) => observer.observe(element));
+} else {
+  revealElements.forEach((element) => element.classList.add('visible'));
+}
 
 if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
   document.querySelectorAll('[data-tilt]').forEach((card) => {
