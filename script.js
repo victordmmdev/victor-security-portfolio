@@ -25,17 +25,30 @@ if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
   });
 
   const stage = document.querySelector('[data-parallax]');
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
   window.addEventListener('pointermove', (event) => {
     if (!stage) return;
-    const x = event.clientX / window.innerWidth - 0.5;
-    const y = event.clientY / window.innerHeight - 0.5;
-    stage.style.transform = `rotateX(${-y * 6}deg) rotateY(${x * 9}deg)`;
+    targetX = event.clientX / window.innerWidth - 0.5;
+    targetY = event.clientY / window.innerHeight - 0.5;
   }, { passive: true });
+  function animateParallax() {
+    if (stage) {
+      currentX += (targetX - currentX) * 0.075;
+      currentY += (targetY - currentY) * 0.075;
+      stage.style.transform = `rotateX(${-currentY * 6}deg) rotateY(${currentX * 9}deg)`;
+    }
+    requestAnimationFrame(animateParallax);
+  }
+  animateParallax();
 }
 
 const canvas = document.getElementById('network-canvas');
 const context = canvas.getContext('2d');
 let points = [];
+let lastNetworkFrame = 0;
 
 function resizeCanvas() {
   const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -53,7 +66,12 @@ function resizeCanvas() {
   }));
 }
 
-function drawNetwork() {
+function drawNetwork(timestamp = 0) {
+  if (!reducedMotion && timestamp - lastNetworkFrame < 40 && timestamp !== 0) {
+    requestAnimationFrame(drawNetwork);
+    return;
+  }
+  lastNetworkFrame = timestamp;
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
   points.forEach((point, index) => {
     if (!reducedMotion) {
@@ -94,6 +112,13 @@ if (globeCanvas && globeContext) {
     const angle = index * Math.PI * (3 - Math.sqrt(5));
     return { x: Math.cos(angle) * ringRadius, y, z: Math.sin(angle) * ringRadius };
   });
+  const meshEdges = meshNodes.flatMap((point, index) => meshNodes
+    .map((target, targetIndex) => ({ targetIndex, distance: Math.hypot(point.x - target.x, point.y - target.y, point.z - target.z) }))
+    .filter(({ targetIndex }) => targetIndex > index)
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, 2)
+    .filter(({ distance }) => distance < .72)
+    .map(({ targetIndex }) => [index, targetIndex]));
   const landMasses = [
     [[72,-150],[62,-128],[50,-124],[42,-105],[30,-98],[20,-105],[12,-88],[20,-82],[30,-82],[46,-66],[58,-72],[70,-100],[72,-150]],
     [[12,-80],[4,-77],[-8,-78],[-20,-70],[-34,-62],[-54,-68],[-44,-52],[-22,-44],[-4,-50],[8,-60],[12,-80]],
@@ -135,7 +160,13 @@ if (globeCanvas && globeContext) {
     globeContext.stroke();
   }
 
+  let lastGlobeFrame = 0;
   function drawGlobe(time = 0) {
+    if (!reducedMotion && time - lastGlobeFrame < 33 && time !== 0) {
+      requestAnimationFrame(drawGlobe);
+      return;
+    }
+    lastGlobeFrame = time;
     const yaw = reducedMotion ? 0.35 : time * 0.000075;
     globeContext.clearRect(0, 0, size, size);
 
@@ -158,22 +189,20 @@ if (globeCanvas && globeContext) {
     }
     landMasses.forEach((shape) => drawCurve(shape, yaw, 'rgba(255,132,144,.78)', 2.2));
 
-    const visibleNodes = meshNodes.map((point) => rotatePoint(point, yaw)).filter((point) => point.z > -.08);
-    visibleNodes.forEach((point, index) => {
-      const nearest = visibleNodes
-        .map((target, targetIndex) => ({ target, targetIndex, distance: Math.hypot(point.x - target.x, point.y - target.y) }))
-        .filter(({ targetIndex }) => targetIndex > index)
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, 2);
-      nearest.forEach(({ target, distance }) => {
-        if (distance > .52) return;
-        globeContext.beginPath();
-        globeContext.moveTo(center + point.x * radius, center - point.y * radius);
-        globeContext.lineTo(center + target.x * radius, center - target.y * radius);
-        globeContext.strokeStyle = `rgba(255,75,96,${.18 * Math.min(point.z + .25, 1)})`;
-        globeContext.lineWidth = .8;
-        globeContext.stroke();
-      });
+    const rotatedNodes = meshNodes.map((point) => rotatePoint(point, yaw));
+    meshEdges.forEach(([startIndex, endIndex]) => {
+      const point = rotatedNodes[startIndex];
+      const target = rotatedNodes[endIndex];
+      if (point.z < -.08 || target.z < -.08) return;
+      globeContext.beginPath();
+      globeContext.moveTo(center + point.x * radius, center - point.y * radius);
+      globeContext.lineTo(center + target.x * radius, center - target.y * radius);
+      globeContext.strokeStyle = `rgba(255,75,96,${.18 * Math.min(point.z + .25, 1)})`;
+      globeContext.lineWidth = .8;
+      globeContext.stroke();
+    });
+    rotatedNodes.forEach((point, index) => {
+      if (point.z < -.08) return;
       const depth = Math.max(.2, point.z + .35);
       globeContext.beginPath();
       globeContext.arc(center + point.x * radius, center - point.y * radius, index % 9 === 0 ? 3.2 : 1.3, 0, Math.PI * 2);
