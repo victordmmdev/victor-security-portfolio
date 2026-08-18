@@ -94,6 +94,13 @@ if (globeCanvas && globeContext) {
     const angle = index * Math.PI * (3 - Math.sqrt(5));
     return { x: Math.cos(angle) * ringRadius, y, z: Math.sin(angle) * ringRadius };
   });
+  const landMasses = [
+    [[72,-150],[62,-128],[50,-124],[42,-105],[30,-98],[20,-105],[12,-88],[20,-82],[30,-82],[46,-66],[58,-72],[70,-100],[72,-150]],
+    [[12,-80],[4,-77],[-8,-78],[-20,-70],[-34,-62],[-54,-68],[-44,-52],[-22,-44],[-4,-50],[8,-60],[12,-80]],
+    [[36,-10],[50,0],[60,20],[68,42],[58,62],[50,90],[38,118],[22,120],[8,104],[20,80],[30,58],[34,34],[30,15],[36,-10]],
+    [[34,-16],[18,-18],[4,-8],[-12,12],[-34,18],[-35,32],[-22,43],[-4,40],[12,50],[28,32],[34,10],[34,-16]],
+    [[-12,112],[-20,115],[-38,144],[-34,153],[-18,146],[-10,130],[-12,112]],
+  ].map((shape) => shape.map(([latitude, longitude]) => spherePoint(latitude, longitude)));
 
   function rotatePoint(point, yaw, pitch = -0.18) {
     const cosYaw = Math.cos(yaw);
@@ -149,6 +156,7 @@ if (globeCanvas && globeContext) {
       for (let latitude = -88; latitude <= 88; latitude += 3) points.push(spherePoint(latitude, longitude));
       drawCurve(points, yaw, longitude % 40 === 0 ? 'rgba(255,84,103,.34)' : 'rgba(255,66,88,.19)');
     }
+    landMasses.forEach((shape) => drawCurve(shape, yaw, 'rgba(255,132,144,.78)', 2.2));
 
     const visibleNodes = meshNodes.map((point) => rotatePoint(point, yaw)).filter((point) => point.z > -.08);
     visibleNodes.forEach((point, index) => {
