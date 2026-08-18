@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#07080b">
   <title>Victor Magaldi | Red Team & Cybersecurity</title>
   <script>document.documentElement.classList.add('js')</script>
-  <link rel="stylesheet" href="style.css?v=20260818-3">
+  <link rel="stylesheet" href="style.css?v=20260818-4">
 </head>
 <body>
   <canvas id="network-canvas" aria-hidden="true"></canvas>
@@ -109,13 +109,18 @@ autorização → evidência → relatório</code></pre>
 
       <article class="featured-project reveal">
         <div class="project-visual orbitsec-visual" aria-hidden="true">
-          <div class="radar"><i></i><i></i><i></i><span></span></div>
+          <div class="radar-scene">
+            <div class="radar-platform"><div class="radar-grid"></div><div class="radar-sweep"></div><i class="radar-blip b1"></i><i class="radar-blip b2"></i><i class="radar-blip b3"></i></div>
+            <div class="radar-ring ring-a"></div><div class="radar-ring ring-b"></div><div class="radar-ring ring-c"></div>
+            <div class="radar-axis"></div><span class="radar-core"></span>
+          </div>
           <div class="visual-label">LIVE INVESTIGATION / 3D</div>
         </div>
         <div class="project-content">
           <div class="project-meta"><span>PROJETO PRINCIPAL</span><span>EM DESENVOLVIMENTO</span></div>
           <h3>OrbitSEC</h3>
-          <p>Cockpit local de investigação visual para Kali Linux. Integra terminal, escopo autorizado, processamento estruturado do Nmap, rastreabilidade de evidências e visualização 3D.</p>
+          <p>Workspace local para transformar observações técnicas em uma investigação visual rastreável. O OrbitSEC recebe resultados estruturados do Nmap, valida limites e proveniência e projeta hosts e serviços em um universo 3D sem tratar hipóteses como vulnerabilidades confirmadas.</p>
+          <ul class="project-outcomes"><li>Terminal local e operações visíveis ao usuário</li><li>Escopo autorizado e validação de entrada</li><li>Evidências conectadas à origem da observação</li></ul>
           <ul class="stack"><li>Rust</li><li>Tauri</li><li>React</li><li>TypeScript</li><li>Three.js</li></ul>
           <a class="project-link" href="https://github.com/victordmmdev/OrbitSec-Showcase" target="_blank" rel="noreferrer">Abrir apresentação pública <span>↗</span></a>
         </div>
@@ -125,13 +130,15 @@ autorização → evidência → relatório</code></pre>
         <article class="project-card tilt reveal" data-tilt>
           <div class="project-mini siem-visual" aria-hidden="true"><div class="siem-core"></div><i></i><i></i><i></i><span></span></div>
           <div class="project-number">02</div><div class="project-meta"><span>PYTHON</span><span>8 TESTES</span></div>
-          <h3>SOC Eye of GOD</h3><p>Mini-SIEM educacional que normaliza logs SSH, persiste eventos em SQLite e detecta falhas repetidas de autenticação.</p>
+          <h3>SOC Eye of GOD</h3><p>Mini-SIEM educacional que percorre o fluxo completo de detecção: recebe logs SSH, converte registros distintos para um modelo comum, armazena os eventos e aplica uma regra para identificar repetidas falhas de autenticação por origem.</p>
+          <ul class="project-outcomes"><li>Ingestão e normalização de logs Linux</li><li>Persistência e consulta local em SQLite</li><li>Detecção reproduzível com testes automatizados</li></ul>
           <a href="https://github.com/victordmmdev/soc-eye-of-god-project" target="_blank" rel="noreferrer">Ver código <span>↗</span></a>
         </article>
         <article class="project-card tilt reveal" data-tilt>
           <div class="project-mini audit-visual" aria-hidden="true"><div class="audit-cube"><i></i><i></i><i></i><i></i><i></i><i></i></div><span></span><span></span><span></span></div>
           <div class="project-number">03</div><div class="project-meta"><span>PYTHON</span><span>6 TESTES</span></div>
-          <h3>AD Software Audit</h3><p>Laboratório com inventário sintético, correlação de CVEs candidatas e priorização de risco por host.</p>
+          <h3>AD Software Audit</h3><p>Laboratório de gestão de vulnerabilidades que relaciona inventário sintético de softwares e versões a CVEs candidatas. O resultado organiza a exposição por máquina para apoiar validação técnica e priorização, sem apresentar correlação automática como achado confirmado.</p>
+          <ul class="project-outcomes"><li>Inventário controlado por host e software</li><li>Correlação contextual de versões e CVEs</li><li>Relatório priorizado para revisão humana</li></ul>
           <a href="https://github.com/victordmmdev/AD-Software-Audit" target="_blank" rel="noreferrer">Ver metodologia <span>↗</span></a>
         </article>
       </div>
@@ -149,7 +156,7 @@ autorização → evidência → relatório</code></pre>
 
     <section class="section shell thm-section">
       <div class="thm-card reveal">
-        <div><p class="eyebrow">PRÁTICA CONTÍNUA</p><h2>TryHackMe</h2><p>Laboratórios de redes, fundamentos de pentest, segurança ofensiva e defensiva em ambientes controlados.</p></div>
+        <div><p class="eyebrow">PRÁTICA CONTÍNUA</p><h2>TryHackMe</h2><p>Laboratórios de redes, pentest e segurança ofensiva e defensiva em ambientes controlados. Também participo ativamente dos CTFs mensais da plataforma para praticar enumeração, exploração e resolução de desafios sob novas condições.</p><span class="ctf-live"><i></i> ATIVO NOS CTFS MENSAIS</span></div>
         <div class="thm-rank"><strong>TOP 25%</strong><span>17 salas · 5 badges</span></div>
         <a class="button primary" href="https://tryhackme.com/p/victormmagaldi" target="_blank" rel="noreferrer">Abrir perfil <span>↗</span></a>
       </div>
@@ -164,6 +171,6 @@ autorização → evidência → relatório</code></pre>
   </main>
 
   <footer class="shell"><span>© <b id="year"></b> Victor Magaldi</span><span>Construído com HTML, CSS e JavaScript.</span></footer>
-  <script src="script.js?v=20260818-3"></script>
+  <script src="script.js?v=20260818-4"></script>
 </body>
 </html>
