@@ -3,88 +3,168 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfólio de Victor Magaldi: suporte de sistemas, IAM, automação e projetos práticos de segurança defensiva.">
-  <title>Victor Magaldi | Tecnologia e Cybersecurity</title>
+  <meta name="description" content="Portfólio de Victor Magaldi: Red Team, pentest web, análise de vulnerabilidades, Python e experiência em tecnologia corporativa.">
+  <meta name="theme-color" content="#07080b">
+  <title>Victor Magaldi | Red Team & Cybersecurity</title>
+  <script>document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <canvas id="network-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+
   <header class="site-header">
-    <a class="brand" href="#inicio">VM<span>/security</span></a>
+    <a class="brand" href="#inicio" aria-label="Victor Magaldi — início">
+      <span class="brand-mark">VM</span><span class="brand-path">/redteam</span>
+    </a>
     <nav aria-label="Navegação principal">
       <a href="#sobre">Sobre</a>
-      <a href="#experiencia">Experiência</a>
+      <a href="#arsenal">Arsenal</a>
       <a href="#projetos">Projetos</a>
-      <a href="#contato">Contato</a>
+      <a href="#experiencia">Experiência</a>
     </nav>
+    <a class="header-cta" href="https://www.linkedin.com/in/victormmagaldi/" target="_blank" rel="noreferrer">Contato <span>↗</span></a>
   </header>
 
   <main id="inicio">
     <section class="hero shell">
-      <p class="eyebrow">SUPORTE DE SISTEMAS · IAM · PYTHON · CYBERSECURITY</p>
-      <h1>Victor Magaldi</h1>
-      <p class="lead">Profissional de tecnologia em transição para segurança defensiva, com experiência corporativa em suporte SaaS, gestão de acessos, ativos de software, troubleshooting e automação.</p>
-      <div class="actions">
-        <a class="primary" href="https://github.com/victordmmdev" target="_blank" rel="noreferrer">Ver GitHub</a>
-        <a href="https://tryhackme.com/p/victormmagaldi" target="_blank" rel="noreferrer">TryHackMe</a>
-        <a href="https://www.linkedin.com/in/victormmagaldi/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <div class="hero-copy reveal">
+        <div class="availability"><i></i> Em evolução para Segurança Ofensiva</div>
+        <p class="eyebrow">RED TEAM · PENTEST WEB · VULNERABILITY ANALYSIS</p>
+        <h1>Victor<br><span>Magaldi</span></h1>
+        <p class="lead">Profissional de tecnologia construindo uma carreira em segurança ofensiva, unindo experiência corporativa, automação em Python e investigação técnica para identificar riscos com responsabilidade.</p>
+        <div class="actions">
+          <a class="button primary" href="#projetos">Explorar projetos <span>↓</span></a>
+          <a class="button ghost" href="https://tryhackme.com/p/victormmagaldi" target="_blank" rel="noreferrer">Ver TryHackMe <span>↗</span></a>
+        </div>
+        <ul class="hero-proof" aria-label="Evidências profissionais">
+          <li><strong>Top 25%</strong><span>TryHackMe</span></li>
+          <li><strong>17</strong><span>salas concluídas</span></li>
+          <li><strong>5</strong><span>badges conquistadas</span></li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal" data-delay="1" aria-label="Visualização tridimensional decorativa de uma superfície de ataque">
+        <div class="orbital-stage" data-parallax>
+          <div class="orbit orbit-one"><i></i></div>
+          <div class="orbit orbit-two"><i></i></div>
+          <div class="orbit orbit-three"></div>
+          <div class="cyber-orb">
+            <div class="orb-grid"></div>
+            <div class="orb-scan"></div>
+            <span class="orb-node n1"></span><span class="orb-node n2"></span><span class="orb-node n3"></span><span class="orb-node n4"></span>
+          </div>
+          <div class="telemetry t1"><small>VECTOR</small><b>WEB_01</b></div>
+          <div class="telemetry t2"><small>SCOPE</small><b>AUTHORIZED</b></div>
+          <div class="telemetry t3"><small>STATUS</small><b>LEARNING</b></div>
+        </div>
       </div>
     </section>
 
-    <section id="sobre" class="shell section">
-      <p class="eyebrow">PERFIL</p>
-      <h2>Operação real, segurança como próximo passo</h2>
-      <div class="two-columns">
-        <p>Minha base profissional foi construída em ambientes corporativos, atendendo usuários e áreas de negócio, investigando incidentes técnicos e administrando processos relacionados a sistemas, acessos, endpoints e licenciamento.</p>
-        <p>Nos estudos e projetos autorais, aplico essa experiência a monitoramento, normalização de logs, análise de vulnerabilidades, rastreabilidade de evidências e desenvolvimento de ferramentas seguras.</p>
+    <section id="sobre" class="section shell">
+      <div class="section-index">01 / PERFIL</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">MENTALIDADE OFENSIVA, BASE OPERACIONAL</p>
+        <h2>Entender o ambiente antes de testar seus limites.</h2>
       </div>
-      <ul class="tags" aria-label="Competências principais">
-        <li>Python</li><li>Linux</li><li>IAM</li><li>APIs</li><li>SQLite</li><li>Git</li><li>Log analysis</li><li>Vulnerability analysis</li><li>Nmap</li><li>Burp Suite</li>
-      </ul>
+      <div class="profile-grid">
+        <article class="statement reveal">
+          <p>Minha trajetória em suporte especializado, sistemas SaaS, ativos, acessos e troubleshooting me ensinou a analisar ambientes reais — pessoas, processos e tecnologia — antes de propor qualquer ação.</p>
+          <p>Hoje aplico essa base em laboratórios autorizados de Red Team, pentest web, enumeração e análise de vulnerabilidades, documentando evidências e distinguindo hipóteses de achados confirmados.</p>
+        </article>
+        <aside class="terminal-card tilt reveal" data-tilt>
+          <div class="terminal-bar"><span></span><span></span><span></span><b>victor@redteam:~</b></div>
+          <pre><code><span class="prompt">$</span> whoami
+Victor Magaldi
+
+<span class="prompt">$</span> cat focus.txt
+Red Team
+Pentest Web
+Vulnerability Analysis
+Security Automation
+
+<span class="prompt">$</span> echo $ETHICS
+autorização → evidência → relatório</code></pre>
+        </aside>
+      </div>
     </section>
 
-    <section id="experiencia" class="shell section">
-      <p class="eyebrow">EXPERIÊNCIA</p>
-      <h2>Contexto corporativo</h2>
-      <div class="cards">
-        <article><h3>Ploomes</h3><p>Suporte especializado a CRM SaaS, documentação técnica, análise de processos, automações, integrações e investigação de incidentes.</p></article>
-        <article><h3>NAVA</h3><p>Gestão de ativos e licenciamento de software, suporte Microsoft 365 e atividades relacionadas a endpoints e acessos.</p></article>
-        <article><h3>CPFL Energia / Stefanini</h3><p>Suporte a usuários e ambientes corporativos, troubleshooting e continuidade operacional.</p></article>
+    <section id="arsenal" class="section shell">
+      <div class="section-index">02 / ARSENAL</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">COMPETÊNCIAS EM DESENVOLVIMENTO</p>
+        <h2>Ferramentas são meios. Metodologia é o diferencial.</h2>
+      </div>
+      <div class="capability-grid">
+        <article class="capability tilt reveal" data-tilt><span>01</span><h3>Reconhecimento</h3><p>Enumeração de hosts, portas, serviços e superfícies web em escopo autorizado.</p><ul><li>Nmap</li><li>Linux</li><li>Redes</li></ul></article>
+        <article class="capability tilt reveal" data-tilt><span>02</span><h3>Pentest Web</h3><p>Estudo prático de aplicações, requisições HTTP e classes de falhas do OWASP Top 10.</p><ul><li>Burp Suite</li><li>HTTP</li><li>OWASP</li></ul></article>
+        <article class="capability tilt reveal" data-tilt><span>03</span><h3>Vulnerabilidades</h3><p>Triagem de CVEs candidatas, validação contextual e priorização baseada em evidências.</p><ul><li>CVEs</li><li>CVSS</li><li>Relatórios</li></ul></article>
+        <article class="capability tilt reveal" data-tilt><span>04</span><h3>Automação</h3><p>Desenvolvimento de ferramentas para reduzir tarefas repetitivas e organizar investigações.</p><ul><li>Python</li><li>APIs</li><li>Git</li></ul></article>
       </div>
     </section>
 
-    <section id="projetos" class="shell section">
-      <p class="eyebrow">PROJETOS VERIFICÁVEIS</p>
-      <h2>Segurança aplicada</h2>
-      <div class="projects">
-        <article>
-          <span class="status">Em desenvolvimento</span>
+    <section id="projetos" class="section shell projects-section">
+      <div class="section-index">03 / PROJETOS</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">EVIDÊNCIA PÚBLICA</p>
+        <h2>Projetos que podem ser abertos, executados e avaliados.</h2>
+      </div>
+
+      <article class="featured-project reveal">
+        <div class="project-visual orbitsec-visual" aria-hidden="true">
+          <div class="radar"><i></i><i></i><i></i><span></span></div>
+          <div class="visual-label">LIVE INVESTIGATION / 3D</div>
+        </div>
+        <div class="project-content">
+          <div class="project-meta"><span>PROJETO PRINCIPAL</span><span>EM DESENVOLVIMENTO</span></div>
           <h3>OrbitSEC</h3>
-          <p>Cockpit local-first para investigação visual em Kali Linux, com eventos validados, proveniência, escopo autorizado e visualização 3D.</p>
-          <a href="https://github.com/victordmmdev/OrbitSec-Showcase" target="_blank" rel="noreferrer">Documentação pública →</a>
+          <p>Cockpit local de investigação visual para Kali Linux. Integra terminal, escopo autorizado, processamento estruturado do Nmap, rastreabilidade de evidências e visualização 3D.</p>
+          <ul class="stack"><li>Rust</li><li>Tauri</li><li>React</li><li>TypeScript</li><li>Three.js</li></ul>
+          <a class="project-link" href="https://github.com/victordmmdev/OrbitSec-Showcase" target="_blank" rel="noreferrer">Abrir apresentação pública <span>↗</span></a>
+        </div>
+      </article>
+
+      <div class="project-grid">
+        <article class="project-card tilt reveal" data-tilt>
+          <div class="project-number">02</div><div class="project-meta"><span>PYTHON</span><span>8 TESTES</span></div>
+          <h3>SOC Eye of GOD</h3><p>Mini-SIEM educacional que normaliza logs SSH, persiste eventos em SQLite e detecta falhas repetidas de autenticação.</p>
+          <a href="https://github.com/victordmmdev/soc-eye-of-god-project" target="_blank" rel="noreferrer">Ver código <span>↗</span></a>
         </article>
-        <article>
-          <span class="status">Executável · 8 testes</span>
-          <h3>SOC Eye of GOD</h3>
-          <p>Mini-SIEM educacional em Python que normaliza logs SSH, persiste eventos em SQLite e detecta falhas repetidas.</p>
-          <a href="https://github.com/victordmmdev/soc-eye-of-god-project" target="_blank" rel="noreferrer">Código e validação →</a>
-        </article>
-        <article>
-          <span class="status">Dados sintéticos · 6 testes</span>
-          <h3>AD Software Audit</h3>
-          <p>Laboratório de inventário de software, correlação de CVEs candidatas e priorização de risco por host.</p>
-          <a href="https://github.com/victordmmdev/AD-Software-Audit" target="_blank" rel="noreferrer">Código e metodologia →</a>
+        <article class="project-card tilt reveal" data-tilt>
+          <div class="project-number">03</div><div class="project-meta"><span>PYTHON</span><span>6 TESTES</span></div>
+          <h3>AD Software Audit</h3><p>Laboratório com inventário sintético, correlação de CVEs candidatas e priorização de risco por host.</p>
+          <a href="https://github.com/victordmmdev/AD-Software-Audit" target="_blank" rel="noreferrer">Ver metodologia <span>↗</span></a>
         </article>
       </div>
     </section>
 
-    <section id="contato" class="shell section contact">
-      <p class="eyebrow">CONTATO</p>
-      <h2>Vamos conversar sobre tecnologia e segurança.</h2>
-      <p>Disponível para contato profissional pelo LinkedIn.</p>
-      <a class="primary" href="https://www.linkedin.com/in/victormmagaldi/" target="_blank" rel="noreferrer">Abrir LinkedIn</a>
+    <section id="experiencia" class="section shell">
+      <div class="section-index">04 / EXPERIÊNCIA</div>
+      <div class="section-heading reveal"><p class="eyebrow">TRAJETÓRIA CORPORATIVA</p><h2>Experiência operacional que fortalece a visão ofensiva.</h2></div>
+      <div class="timeline">
+        <article class="reveal"><div><span>CRM · SAAS · APIS</span><h3>Ploomes</h3></div><p>Suporte especializado, documentação técnica, análise de processos, automações, integrações e investigação de incidentes técnicos.</p></article>
+        <article class="reveal"><div><span>ATIVOS · LICENCIAMENTO · M365</span><h3>NAVA</h3></div><p>Gestão de ativos e licenças de software, suporte a ambientes Microsoft 365, endpoints e processos relacionados a acessos.</p></article>
+        <article class="reveal"><div><span>SUPORTE · INFRAESTRUTURA</span><h3>CPFL Energia / Stefanini</h3></div><p>Atendimento a usuários e áreas de negócio, troubleshooting e apoio à continuidade de ambientes corporativos.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell thm-section">
+      <div class="thm-card reveal">
+        <div><p class="eyebrow">PRÁTICA CONTÍNUA</p><h2>TryHackMe</h2><p>Laboratórios de redes, fundamentos de pentest, segurança ofensiva e defensiva em ambientes controlados.</p></div>
+        <div class="thm-rank"><strong>TOP 25%</strong><span>17 salas · 5 badges</span></div>
+        <a class="button primary" href="https://tryhackme.com/p/victormmagaldi" target="_blank" rel="noreferrer">Abrir perfil <span>↗</span></a>
+      </div>
+    </section>
+
+    <section id="contato" class="section contact shell reveal">
+      <p class="eyebrow">PRÓXIMO OBJETIVO</p>
+      <h2>Red Team, Pentest ou Segurança Ofensiva.</h2>
+      <p>Busco oportunidades para transformar estudo consistente, experiência operacional e desenvolvimento em avaliações técnicas responsáveis.</p>
+      <div class="actions"><a class="button primary" href="https://www.linkedin.com/in/victormmagaldi/" target="_blank" rel="noreferrer">Falar pelo LinkedIn <span>↗</span></a><a class="button ghost" href="https://github.com/victordmmdev" target="_blank" rel="noreferrer">Explorar GitHub <span>↗</span></a></div>
     </section>
   </main>
-  <footer class="shell">© <span id="year"></span> Victor Magaldi · Conteúdo sem métricas simuladas ou alegações não verificáveis.</footer>
+
+  <footer class="shell"><span>© <b id="year"></b> Victor Magaldi</span><span>Construído com HTML, CSS e JavaScript.</span></footer>
   <script src="script.js"></script>
 </body>
 </html>

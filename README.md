@@ -1,6 +1,6 @@
 # Victor Magaldi — Security Portfolio
 
-Site estático que apresenta minha experiência corporativa e projetos verificáveis de cybersecurity.
+Site estático que apresenta minha trajetória em tecnologia, meu direcionamento para Red Team e projetos verificáveis de cybersecurity.
 
 ## Princípios do conteúdo
 
@@ -19,4 +19,4 @@ Abra `http://127.0.0.1:8000`.
 
 ## Tecnologias
 
-HTML semântico, CSS responsivo e JavaScript mínimo, sem framework ou dependências de runtime.
+HTML semântico, CSS responsivo, efeitos 3D acessíveis e JavaScript sem framework. O projeto utiliza canvas para a rede de fundo, inclinação por ponteiro nos cards e respeita `prefers-reduced-motion`.
