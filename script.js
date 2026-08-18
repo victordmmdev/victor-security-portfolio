@@ -80,3 +80,112 @@ function drawNetwork() {
 resizeCanvas();
 drawNetwork();
 window.addEventListener('resize', resizeCanvas, { passive: true });
+
+const globeCanvas = document.getElementById('globe-canvas');
+const globeContext = globeCanvas?.getContext('2d');
+
+if (globeCanvas && globeContext) {
+  const size = globeCanvas.width;
+  const center = size / 2;
+  const radius = size * 0.405;
+  const meshNodes = Array.from({ length: 42 }, (_, index) => {
+    const y = 1 - (index / 41) * 2;
+    const ringRadius = Math.sqrt(1 - y * y);
+    const angle = index * Math.PI * (3 - Math.sqrt(5));
+    return { x: Math.cos(angle) * ringRadius, y, z: Math.sin(angle) * ringRadius };
+  });
+
+  function rotatePoint(point, yaw, pitch = -0.18) {
+    const cosYaw = Math.cos(yaw);
+    const sinYaw = Math.sin(yaw);
+    const x = point.x * cosYaw - point.z * sinYaw;
+    const z = point.x * sinYaw + point.z * cosYaw;
+    const cosPitch = Math.cos(pitch);
+    const sinPitch = Math.sin(pitch);
+    return { x, y: point.y * cosPitch - z * sinPitch, z: point.y * sinPitch + z * cosPitch };
+  }
+
+  function spherePoint(latitude, longitude) {
+    const lat = latitude * Math.PI / 180;
+    const lon = longitude * Math.PI / 180;
+    return { x: Math.cos(lat) * Math.cos(lon), y: Math.sin(lat), z: Math.cos(lat) * Math.sin(lon) };
+  }
+
+  function drawCurve(points, yaw, color, width = 1) {
+    let drawing = false;
+    globeContext.beginPath();
+    points.forEach((point) => {
+      const rotated = rotatePoint(point, yaw);
+      if (rotated.z < -0.08) { drawing = false; return; }
+      const x = center + rotated.x * radius;
+      const y = center - rotated.y * radius;
+      if (!drawing) globeContext.moveTo(x, y);
+      else globeContext.lineTo(x, y);
+      drawing = true;
+    });
+    globeContext.strokeStyle = color;
+    globeContext.lineWidth = width;
+    globeContext.stroke();
+  }
+
+  function drawGlobe(time = 0) {
+    const yaw = reducedMotion ? 0.35 : time * 0.000075;
+    globeContext.clearRect(0, 0, size, size);
+
+    const halo = globeContext.createRadialGradient(center * 0.78, center * 0.68, 8, center, center, radius * 1.12);
+    halo.addColorStop(0, 'rgba(255,132,145,.24)');
+    halo.addColorStop(.45, 'rgba(120,10,35,.10)');
+    halo.addColorStop(1, 'rgba(0,0,0,0)');
+    globeContext.fillStyle = halo;
+    globeContext.fillRect(0, 0, size, size);
+
+    for (let latitude = -60; latitude <= 60; latitude += 20) {
+      const points = [];
+      for (let longitude = -180; longitude <= 180; longitude += 4) points.push(spherePoint(latitude, longitude));
+      drawCurve(points, yaw, 'rgba(255,66,88,.28)');
+    }
+    for (let longitude = -180; longitude < 180; longitude += 20) {
+      const points = [];
+      for (let latitude = -88; latitude <= 88; latitude += 3) points.push(spherePoint(latitude, longitude));
+      drawCurve(points, yaw, longitude % 40 === 0 ? 'rgba(255,84,103,.34)' : 'rgba(255,66,88,.19)');
+    }
+
+    const visibleNodes = meshNodes.map((point) => rotatePoint(point, yaw)).filter((point) => point.z > -.08);
+    visibleNodes.forEach((point, index) => {
+      const nearest = visibleNodes
+        .map((target, targetIndex) => ({ target, targetIndex, distance: Math.hypot(point.x - target.x, point.y - target.y) }))
+        .filter(({ targetIndex }) => targetIndex > index)
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 2);
+      nearest.forEach(({ target, distance }) => {
+        if (distance > .52) return;
+        globeContext.beginPath();
+        globeContext.moveTo(center + point.x * radius, center - point.y * radius);
+        globeContext.lineTo(center + target.x * radius, center - target.y * radius);
+        globeContext.strokeStyle = `rgba(255,75,96,${.18 * Math.min(point.z + .25, 1)})`;
+        globeContext.lineWidth = .8;
+        globeContext.stroke();
+      });
+      const depth = Math.max(.2, point.z + .35);
+      globeContext.beginPath();
+      globeContext.arc(center + point.x * radius, center - point.y * radius, index % 9 === 0 ? 3.2 : 1.3, 0, Math.PI * 2);
+      globeContext.fillStyle = index % 9 === 0 ? `rgba(255,185,191,${depth})` : `rgba(255,73,95,${depth * .75})`;
+      globeContext.shadowColor = '#ff4055';
+      globeContext.shadowBlur = index % 9 === 0 ? 16 : 5;
+      globeContext.fill();
+      globeContext.shadowBlur = 0;
+    });
+
+    globeContext.beginPath();
+    globeContext.arc(center, center, radius, 0, Math.PI * 2);
+    globeContext.strokeStyle = 'rgba(255,103,120,.56)';
+    globeContext.lineWidth = 1.5;
+    globeContext.stroke();
+    if (!reducedMotion && !document.hidden) requestAnimationFrame(drawGlobe);
+  }
+
+  drawGlobe();
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && !reducedMotion) requestAnimationFrame(drawGlobe);
+  });
+}

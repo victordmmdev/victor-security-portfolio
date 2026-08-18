@@ -19,4 +19,4 @@ Abra `http://127.0.0.1:8000`.
 
 ## Tecnologias
 
-HTML semântico, CSS responsivo, efeitos 3D acessíveis e JavaScript sem framework. O projeto utiliza canvas para a rede de fundo, inclinação por ponteiro nos cards e respeita `prefers-reduced-motion`.
+HTML semântico, CSS responsivo, efeitos 3D acessíveis e JavaScript sem framework. O projeto utiliza canvas para a rede de fundo e a esfera tridimensional, inclinação por ponteiro nos cards e respeita `prefers-reduced-motion`.
