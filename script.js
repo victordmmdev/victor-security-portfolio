@@ -1,4 +1,7 @@
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// This portfolio is intentionally motion-led. Some Chrome/Windows setups report
+// reduced motion even when the visitor expects the interactive presentation,
+// which previously froze every decorative effect on the page.
+const reducedMotion = false;
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
